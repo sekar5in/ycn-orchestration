@@ -24,6 +24,13 @@ class LoginForm(forms.Form):
             }
         ))
 
+    org = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Organization",
+                "class": "form-control"
+            }
+        ))
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(
