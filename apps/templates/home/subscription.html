@@ -104,26 +104,37 @@
 						<div class="card-header">
 							<h5>Create Organization</h5>
 						</div>
-						<div class="card-body">
+						<div class="card-body col-md-6 col-lg-4">
 							<form role="form" method="post" action="">
 
 								{% csrf_token %}
 
 								<div class="input-group mb-3">
-									<span class="input-group-text"><i class="feather icon-user"></i></span>
-									{{ form.org }}
+									<span class="input-group-text bg-primary text-white col-5"><i class="feather icon-users"></i>&nbsp; Organization Name</span>
+									<input type="text" class="form-control" name="">
+									<!-- {{ form.org }} -->
 								</div>
 
 								<div class="input-group mb-3">
-									<span class="input-group-text"><i class="feather icon-user"></i></span>
-									{{ form.username }}
-								</div>
-								<div class="input-group mb-4">
-									<span class="input-group-text"><i class="feather icon-lock"></i></span>
-									{{ form.password }}
+									<span class="input-group-text col-5 bg-primary text-white"><i class="feather icon-briefcase"></i>&nbsp; Subscription Plan</span>
+									<select type="text" class="form-control form-select" name="" id="subscription__select">
+										<option value="1">Monthly Plan</option>
+										<option value="2">Yearly Plan</option>
+										<option value="3">Maximum Devices Plan</option>
+									</select>
+									<!-- {{ form.username }} -->
 								</div>
 
-								<button type="submit" name="login" class="btn btn-block btn-primary mt-2 mb-4">Sign In</button>
+								<div class="input-group mb-3">
+									<!-- <span class="input-group-text col-5"><i class="feather icon-users"></i></span> -->
+									<input type="date" class="form-control" name="" id="date__picker__id">
+									<input type="number" min="0" max="99999" class="form-control" name="" id="range__id" hidden>
+									<!-- {{ form.org }} -->
+
+									<!-- <span class="input-group-text col-5"><i class="feather icon-users"></i></span> -->
+								</div>
+
+								<button type="submit" name="login" class="btn btn-block btn-primary mt-2 mb-4">Subscribe</button>
 
 							</form>
 						</div>
@@ -327,4 +338,22 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script type="text/javascript">
+	const subscriptionSelect = document.querySelector("#subscription__select");
+	const dateInput = document.querySelector("#date__picker__id");
+	const yearInput = document.querySelector("#range__id");
+
+
+	subscriptionSelect.onchange = function (){
+		if(this.value == 3){
+			dateInput.setAttribute("hidden", "true");
+			yearInput.removeAttribute("hidden", "");
+		}
+		else{
+			dateInput.removeAttribute("hidden", "");
+			yearInput.setAttribute("hidden", "true");
+		}
+	}
+</script>
+{% endblock javascripts %}
